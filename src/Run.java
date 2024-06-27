@@ -223,9 +223,50 @@ public class Run {
                 printMatrix();
                 selectShip();
             }
-
         }
+    }
+    public void attackHuman(){
+        Scanner sc = new Scanner(System.in);
 
+        System.out.println("Pls select your attack coordination");
+        System.out.println("Pls select your attacking x and y axis");
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+
+        if(computerMatrix[x][y] == 1){
+            computerMatrix[x][y] = 9;
+            System.out.println("Was Shot!");
+            if (checkMatrix(computerMatrix)) {
+                attackComputer();
+            } else {
+                System.out.println("Game Finished! \nYou Win!");
+            }
+        }else{
+            System.out.println("You Missed");
+            attackComputer();
+        }
+    }
+    public void attackComputer(){
+        Random rnd = new Random(5);
+
+        int x = rnd.nextInt();
+        int y = rnd.nextInt();
+
+        if(matrix[x][y] == 1){
+            matrix[x][y] = 9;
+            System.out.println("Your Ship was hit");
+            printMatrix();
+            if (checkMatrix(matrix)) {
+                attackHuman();
+            } else {
+                System.out.println("Game Finished! \nYou Lose!");
+            }
+
+        }else{
+            System.out.println("Computer missed your Ship");
+            printMatrix();
+            attackHuman();
+        }
     }
     public void computerSelectShip(){
         Random rnd = new Random(4);
@@ -392,6 +433,26 @@ public class Run {
 
         }
 
+    }
+    public static boolean checkMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int element : row) {
+                if (element == 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean checkMatrixComputer(int[][] computerMatrix) {
+        for (int[] row : computerMatrix) {
+            for (int element : row) {
+                if (element == 1) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 
