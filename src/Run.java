@@ -1,7 +1,12 @@
 import java.util.*;
 public class Run {
+    private int smallShip;
+    private int middleShip;
+    private int largeShip;
     private ArrayList<Integer> containNumber = new ArrayList<>();
-    private enum axis{x,y}
+
+    private enum axis {x, y}
+
     private int[][] matrix = new int[5][5];
 
     public Run() {
@@ -10,7 +15,7 @@ public class Run {
         containNumber.add(3);
     }
 
-    public void printMatrix(){
+    public void printMatrix() {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 System.out.print(matrix[i][j] + "  ");
@@ -19,7 +24,7 @@ public class Run {
         }
     }
 
-    public void selectShip(){
+    public void selectShip() {
         System.out.println("Select Your Ship");
         System.out.println("1 = Small Ship (3x1) \n 2 = Middle Ship (4x1) \n 3 = Long Ship (5x1)");
 
@@ -29,12 +34,12 @@ public class Run {
 
         int shipType = sc.nextInt();
 
-        if(containNumber.contains(shipType)){
+        if (containNumber.contains(shipType)) {
             int index = containNumber.indexOf(shipType);
             containNumber.set(index, 0);
             found = true;
         }
-        if(found){
+        if (found) {
             switch (shipType) {
                 case 1:
                     putShips("smallShip");
@@ -50,17 +55,28 @@ public class Run {
                     break;
             }
             found = false;
-        }else{
+        } else {
             System.out.println("Pls write different number");
             selectShip();
         }
 
     }
-    public void putShips(String shipType){
+
+    public void putShips(String shipType) {
         Scanner sc = new Scanner(System.in);
 
         int x = 0;
         int y = 0;
+
+        if (shipType.equals("smallShip")) {
+            smallShip = 3;
+        }
+        else if (shipType.equals("middleShip")){
+            middleShip = 4;
+    }
+        else if(shipType.equals("largeShip")){
+            largeShip = 5;
+        }
 
         System.out.println("Which side do you want to place the ship on? x or y");
         String input = sc.nextLine();
@@ -78,113 +94,140 @@ public class Run {
                 break;
         }
 
-        if(shipType.equals("smallShip")){
-            if(chosen.equals(axis.x)){
+        if (shipType.equals("smallShip")) {
+            if (chosen.equals(axis.x)) {
                 System.out.println("Pls write x axis");
                 x = sc.nextInt();
                 System.out.println("Pls write y side to start");
                 y = sc.nextInt();
-                if(y+2<=5 && y>=0) {
-                    matrix[x][y] = 1;
-                    matrix[x][y + 1] = 1;
-                    matrix[x][y + 2] = 1;
-                    printMatrix();
-                    selectShip();
-                }else{
-                    System.exit(1);
-                }
+                for (int i = 0; i < smallShip; i++) {
+                    if (matrix[x][y + i] == 0) {
+                        if (y + 2 <= 5 && y >= 0) {
+                            matrix[x][y + i] = 1;
 
-            }
-            else if(chosen.equals(axis.y)){
+
+                        } else {
+                            System.exit(1);
+                        }
+                    } else {
+                        System.exit(1);
+                    }
+                }
+                printMatrix();
+                selectShip();
+            } else if (chosen.equals(axis.y)) {
                 System.out.println("Pls write y axis");
                 y = sc.nextInt();
                 System.out.println("Pls write x side to start");
                 x = sc.nextInt();
-                if(x+2<=5 && x>=0) {
-                    matrix[x][y] = 1;
-                    matrix[x + 1][y] = 1;
-                    matrix[x + 2][y] = 1;
-                    printMatrix();
-                    selectShip();
-                }else{
-                    System.exit(1);
-                }
 
+                for (int i = 0; i < smallShip ; i++) {
+                    if (matrix[x + i][y] == 0) {
+                        if (x + 2 <= 5 && x >= 0) {
+                            matrix[x + i][y] = 1;
+
+
+                        } else {
+                            System.exit(1);
+                        }
+                    } else {
+                        System.exit(1);
+                    }
+                }
+                printMatrix();
+                selectShip();
 
             }
-        }else if(shipType.equals("middleShip")){
-            if(chosen.equals(axis.x)){
+        } else if (shipType.equals("middleShip")) {
+            if (chosen.equals(axis.x)) {
                 System.out.println("Pls write x axis");
                 x = sc.nextInt();
                 System.out.println("Pls write y side to start");
                 y = sc.nextInt();
-                if(y+3<=5 && y>=0) {
-                    matrix[x][y] = 1;
-                    matrix[x][y + 1] = 1;
-                    matrix[x][y + 2] = 1;
-                    matrix[x][y + 3] = 1;
-                    printMatrix();
-                    selectShip();
-                }else{
-                    System.exit(1);
+
+                for (int i = 0; i < middleShip; i++) {
+                    if (matrix[x][y + i] == 0) {
+                        if (y + 3 <= 5 && y >= 0) {
+                            matrix[x][y + i] = 1;
+
+
+                        } else {
+                            System.exit(1);
+                        }
+                    } else {
+                        System.exit(1);
+                    }
+
                 }
-            }
-            else if(chosen.equals(axis.y)){
+                printMatrix();
+                selectShip();
+            } else if (chosen.equals(axis.y)) {
                 System.out.println("Pls write y axis");
                 y = sc.nextInt();
                 System.out.println("Pls write x side to start");
                 x = sc.nextInt();
-                if(x+3<=5 && x>=0) {
-                    matrix[x][y] = 1;
-                    matrix[x + 1][y] = 1;
-                    matrix[x + 2][y] = 1;
-                    matrix[x + 3][y] = 1;
-                    printMatrix();
-                    selectShip();
-                }else{
-                    System.exit(1);
+
+                for (int i = 0; i < middleShip; i++) {
+                    if (matrix[x + i][y] == 0) {
+                        if (x + 3 <= 5 && x >= 0) {
+                            matrix[x + i][y] = 1;
+                        } else {
+                            System.exit(1);
+                        }
+                    } else {
+                        System.exit(1);
+                    }
                 }
+                printMatrix();
+                selectShip();
             }
-        }else if(shipType.equals("largeShip")){
+        } else if (shipType.equals("largeShip")) {
             System.out.println("Pls write x axis");
-            if(chosen.equals(axis.x)){
+            if (chosen.equals(axis.x)) {
                 x = sc.nextInt();
                 System.out.println("Pls write y side to start");
                 y = sc.nextInt();
-                if(y+4<=5 && y>=0) {
-                    matrix[x][y] = 1;
-                    matrix[x][y + 1] = 1;
-                    matrix[x][y + 2] = 1;
-                    matrix[x][y + 3] = 1;
-                    matrix[x][y + 4] = 1;
-                    printMatrix();
-                    selectShip();
-                }else{
-                    System.exit(1);
+
+                for (int i = 0; i < largeShip; i++) {
+                    if (matrix[x][y + i] == 0) {
+                        if (y + 4 <= 5 && y >= 0) {
+                            matrix[x][y + i] = 1;
+                        } else {
+                            System.exit(1);
+                        }
+                    } else {
+                        System.exit(1);
+                    }
                 }
-            }
-            else if(chosen.equals(axis.y)){
+                printMatrix();
+                selectShip();
+            } else if (chosen.equals(axis.y)) {
                 System.out.println("Pls write y axis");
                 y = sc.nextInt();
                 System.out.println("Pls write x side to start");
                 x = sc.nextInt();
-                if(x+4<=5 && x>=0) {
-                    matrix[x][y] = 1;
-                    matrix[x + 1][y] = 1;
-                    matrix[x + 2][y] = 1;
-                    matrix[x + 3][y] = 1;
-                    matrix[x + 4][y] = 1;
-                    printMatrix();
-                    selectShip();
-                }else{
-                    System.exit(1);
+
+                for (int i = 0; i < largeShip; i++) {
+                    if (matrix[x + i][y] == 0) {
+                        if (x + 4 <= 5 && x >= 0) {
+                                matrix[x + i][y] = 1;
+                        } else {
+                            System.exit(1);
+                        }
+                    } else {
+                        System.exit(1);
+                    }
                 }
+                printMatrix();
+                selectShip();
             }
+
         }
 
     }
-
 }
+
+
 
 
 
