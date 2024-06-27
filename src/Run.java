@@ -8,6 +8,7 @@ public class Run {
     private enum axis {x, y}
 
     private int[][] matrix = new int[5][5];
+    private int[][] computerMatrix = new int[5][5];
 
     public Run() {
         containNumber.add(1);
@@ -25,8 +26,9 @@ public class Run {
     }
 
     public void selectShip() {
-        System.out.println("Select Your Ship");
-        System.out.println("1 = Small Ship (3x1) \n 2 = Middle Ship (4x1) \n 3 = Long Ship (5x1)");
+        System.out.println("Select Your Ship ");
+        printMatrix();
+        System.out.println("\n1 = Small Ship (3x1) \n 2 = Middle Ship (4x1) \n 3 = Long Ship (5x1)");
 
         Scanner sc = new Scanner(System.in);
 
@@ -220,6 +222,172 @@ public class Run {
                 }
                 printMatrix();
                 selectShip();
+            }
+
+        }
+
+    }
+    public void computerSelectShip(){
+        Random rnd = new Random(4);
+
+        boolean found = false;
+
+        int shipType = rnd.nextInt();
+
+        if (containNumber.contains(shipType)) {
+            int index = containNumber.indexOf(shipType);
+            containNumber.set(index, 0);
+            found = true;
+        }
+        if (found) {
+            switch (shipType) {
+                case 1:
+                    computerPutShips("smallShip");
+                    break;
+                case 2:
+                    computerPutShips("middleShip");
+                    break;
+                case 3:
+                    computerPutShips("longShip");
+                    break;
+
+            }
+            found = false;
+        } else {
+            selectShip();
+        }
+
+    }
+    public void computerPutShips(String shipType) {
+        Random rnd = new Random(4);
+
+        int x = 0;
+        int y = 0;
+
+        if (shipType.equals("smallShip")) {
+            smallShip = 3;
+        } else if (shipType.equals("middleShip")) {
+            middleShip = 4;
+        } else if (shipType.equals("largeShip")) {
+            largeShip = 5;
+        }
+        int rNumber = rnd.nextInt(2);
+        axis chosen = null;
+
+        if (rNumber == 0) {
+            chosen = axis.x;
+        } else {
+            chosen = axis.y;
+
+            if (shipType.equals("smallShip")) {
+                if (chosen.equals(axis.x)) {
+                    x = rnd.nextInt();
+                    y = rnd.nextInt();
+                    for (int i = 0; i < smallShip; i++) {
+                        if (computerMatrix[x][y + i] == 0) {
+                            if (y + 2 <= 5 && y >= 0) {
+                                computerMatrix[x][y + i] = 1;
+                            } else {
+                                System.exit(1);
+                            }
+                        } else {
+                            System.exit(1);
+                        }
+                    }
+                    selectShip();
+                } else if (chosen.equals(axis.y)) {
+                    y = rnd.nextInt();
+                    x = rnd.nextInt();
+
+                    for (int i = 0; i < smallShip; i++) {
+                        if (computerMatrix[x + i][y] == 0) {
+                            if (x + 2 <= 5 && x >= 0) {
+                                computerMatrix[x + i][y] = 1;
+
+
+                            } else {
+                                System.exit(1);
+                            }
+                        } else {
+                            System.exit(1);
+                        }
+                    }
+                    computerSelectShip();
+
+                }
+            } else if (shipType.equals("middleShip")) {
+                if (chosen.equals(axis.x)) {
+                    x = rnd.nextInt();
+                    y = rnd.nextInt();
+
+                    for (int i = 0; i < middleShip; i++) {
+                        if (computerMatrix[x][y + i] == 0) {
+                            if (y + 3 <= 5 && y >= 0) {
+                                computerMatrix[x][y + i] = 1;
+
+
+                            } else {
+                                System.exit(1);
+                            }
+                        } else {
+                            System.exit(1);
+                        }
+
+                    }
+                    computerSelectShip();
+
+                } else if (chosen.equals(axis.y)) {
+                    y = rnd.nextInt();
+                    x = rnd.nextInt();
+
+                    for (int i = 0; i < middleShip; i++) {
+                        if (computerMatrix[x + i][y] == 0) {
+                            if (x + 3 <= 5 && x >= 0) {
+                                computerMatrix[x + i][y] = 1;
+                            } else {
+                                System.exit(1);
+                            }
+                        } else {
+                            System.exit(1);
+                        }
+                    }
+                    computerSelectShip();
+                }
+            } else if (shipType.equals("largeShip")) {
+                if (chosen.equals(axis.x)) {
+                    x = rnd.nextInt();
+                    y = rnd.nextInt();
+
+                    for (int i = 0; i < largeShip; i++) {
+                        if (computerMatrix[x][y + i] == 0) {
+                            if (y + 4 <= 5 && y >= 0) {
+                                computerMatrix[x][y + i] = 1;
+                            } else {
+                                System.exit(1);
+                            }
+                        } else {
+                            System.exit(1);
+                        }
+                    }
+                    computerSelectShip();
+                } else if (chosen.equals(axis.y)) {
+                    y = rnd.nextInt();
+                    x = rnd.nextInt();
+
+                    for (int i = 0; i < largeShip; i++) {
+                        if (computerMatrix[x + i][y] == 0) {
+                            if (x + 4 <= 5 && x >= 0) {
+                                computerMatrix[x + i][y] = 1;
+                            } else {
+                                System.exit(1);
+                            }
+                        } else {
+                            System.exit(1);
+                        }
+                    }
+                    computerSelectShip();
+                }
+
             }
 
         }
