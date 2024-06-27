@@ -1,10 +1,14 @@
-import java.util.Scanner;
+import java.util.*;
 public class Run {
-    private int smallShip; //3x1
-    private int middleShip; //4x1
-    private int longShip; //5x1
+    private ArrayList<Integer> containNumber = new ArrayList<>();
     private enum axis{x,y}
     private int[][] matrix = new int[5][5];
+
+    public Run() {
+        containNumber.add(1);
+        containNumber.add(2);
+        containNumber.add(3);
+    }
 
     public void printMatrix(){
         for (int i = 0; i < matrix.length; i++) {
@@ -14,27 +18,42 @@ public class Run {
             System.out.println();
         }
     }
+
     public void selectShip(){
         System.out.println("Select Your Ship");
         System.out.println("1 = Small Ship (3x1) \n 2 = Middle Ship (4x1) \n 3 = Long Ship (5x1)");
 
         Scanner sc = new Scanner(System.in);
+
+        boolean found = false;
+
         int shipType = sc.nextInt();
-        switch(shipType){
-            case 1:
-                putShips("smallShip");
-                break;
-            case 2:
-                putShips("middleShip");
-                break;
-            case 3:
-                putShips("largeShip");
-                break;
-            default:
-                System.out.println("Try Again");
-                break;
-            
+
+        if(containNumber.contains(shipType)){
+            containNumber.remove(shipType);
+            found = true;
         }
+        if(found){
+            switch (shipType) {
+                case 1:
+                    putShips("smallShip");
+                    break;
+                case 2:
+                    putShips("middleShip");
+                    break;
+                case 3:
+                    putShips("largeShip");
+                    break;
+                default:
+                    System.out.println("Try Again");
+                    break;
+            }
+            found = false;
+        }else{
+            System.out.println("Pls write different number");
+            selectShip();
+        }
+
     }
     public void putShips(String shipType){
         Scanner sc = new Scanner(System.in);
