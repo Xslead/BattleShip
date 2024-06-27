@@ -454,6 +454,14 @@ public class Run {
         }
         return false;
     }
+    public static boolean checkZero(ArrayList<Integer> containNumber){
+        for(int element : containNumber){
+            if(element != 0){
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 
