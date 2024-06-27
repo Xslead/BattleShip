@@ -30,7 +30,8 @@ public class Run {
         int shipType = sc.nextInt();
 
         if(containNumber.contains(shipType)){
-            containNumber.remove(shipType);
+            int index = containNumber.indexOf(shipType);
+            containNumber.set(index, 0);
             found = true;
         }
         if(found){
