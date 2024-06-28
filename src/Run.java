@@ -3,12 +3,12 @@ public class Run {
     private int smallShip;
     private int middleShip;
     private int largeShip;
-    private ArrayList<Integer> containNumber = new ArrayList<>();
+    private final ArrayList<Integer> containNumber = new ArrayList<>();
 
     private enum axis {x, y}
 
-    private int[][] matrix = new int[5][5];
-    private int[][] computerMatrix = new int[5][5];
+    private final int[][] matrix = new int[5][5];
+    private final int[][] computerMatrix = new int[5][5];
 
     public Run() {
         containNumber.add(1);
@@ -41,25 +41,27 @@ public class Run {
             containNumber.set(index, 0);
             found = true;
         }
-        if (found) {
-            switch (shipType) {
-                case 1:
-                    putShips("smallShip");
-                    break;
-                case 2:
-                    putShips("middleShip");
-                    break;
-                case 3:
-                    putShips("largeShip");
-                    break;
-                default:
-                    System.out.println("Try Again");
-                    break;
+        if(!checkZero(containNumber)){
+            if (found) {
+                switch (shipType) {
+                    case 1:
+                        putShips("smallShip");
+                        break;
+                    case 2:
+                        putShips("middleShip");
+                        break;
+                    case 3:
+                        putShips("largeShip");
+                        break;
+                    default:
+                        System.out.println("Try Again");
+                        break;
+                }
+                found = false;
+            } else {
+                System.out.println("Pls write different number");
+                selectShip();
             }
-            found = false;
-        } else {
-            System.out.println("Pls write different number");
-            selectShip();
         }
 
     }
@@ -109,10 +111,14 @@ public class Run {
 
 
                         } else {
-                            System.exit(1);
+                            System.out.println("You are off the map. Pls try again!");
+                            containNumber.set(0,1);
+                            selectShip();
                         }
                     } else {
-                        System.exit(1);
+                        System.out.println("There is a ship at the location you selected. Pls try again!");
+                        containNumber.set(0,1);
+                        selectShip();
                     }
                 }
                 printMatrix();
@@ -130,10 +136,14 @@ public class Run {
 
 
                         } else {
-                            System.exit(1);
+                            System.out.println("You are off the map. Pls try again!");
+                            containNumber.set(0,1);
+                            selectShip();
                         }
                     } else {
-                        System.exit(1);
+                        System.out.println("There is a ship at the location you selected. Pls try again!");
+                        containNumber.set(0,1);
+                        selectShip();
                     }
                 }
                 printMatrix();
@@ -154,10 +164,14 @@ public class Run {
 
 
                         } else {
-                            System.exit(1);
+                            System.out.println("You are off the map. Pls try again!");
+                            containNumber.set(1,2);
+                            selectShip();
                         }
                     } else {
-                        System.exit(1);
+                        System.out.println("There is a ship at the location you selected. Pls try again!");
+                        containNumber.set(1,2);
+                        selectShip();
                     }
 
                 }
@@ -174,10 +188,14 @@ public class Run {
                         if (x + 3 <= 5 && x >= 0) {
                             matrix[x + i][y] = 1;
                         } else {
-                            System.exit(1);
+                            System.out.println("You are off the map. Pls try again!");
+                            containNumber.set(1,2);
+                            selectShip();
                         }
                     } else {
-                        System.exit(1);
+                        System.out.println("There is a ship at the location you selected. Pls try again!");
+                        containNumber.set(1,2);
+                        selectShip();
                     }
                 }
                 printMatrix();
@@ -195,10 +213,14 @@ public class Run {
                         if (y + 4 <= 5 && y >= 0) {
                             matrix[x][y + i] = 1;
                         } else {
-                            System.exit(1);
+                            System.out.println("You are off the map. Pls try again!");
+                            containNumber.set(2,3);
+                            selectShip();
                         }
                     } else {
-                        System.exit(1);
+                        System.out.println("There is a ship at the location you selected. Pls try again!");
+                        containNumber.set(2,3);
+                        selectShip();
                     }
                 }
                 printMatrix();
@@ -214,10 +236,14 @@ public class Run {
                         if (x + 4 <= 5 && x >= 0) {
                                 matrix[x + i][y] = 1;
                         } else {
-                            System.exit(1);
+                            System.out.println("You are off the map. Pls try again!");
+                            containNumber.set(2,3);
+                            selectShip();
                         }
                     } else {
-                        System.exit(1);
+                        System.out.println("There is a ship at the location you selected. Pls try again!");
+                        containNumber.set(2,3);
+                        selectShip();
                     }
                 }
                 printMatrix();
