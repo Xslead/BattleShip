@@ -15,6 +15,10 @@ public class Run {
         containNumber.add(2);
         containNumber.add(3);
     }
+    public void start(){
+        selectShip();
+        computerSelectShip();
+    }
 
     public void printMatrix() {
         for (int i = 0; i < matrix.length; i++) {
@@ -42,6 +46,7 @@ public class Run {
             found = true;
         }
         if(!checkZero(containNumber)){
+            containNumber.set(index, 0);
             if (found) {
                 switch (shipType) {
                     case 1:
@@ -62,8 +67,6 @@ public class Run {
                 System.out.println("Pls write different number");
                 selectShip();
             }
-            containNumber.set(index, 0);
-            System.out.println(containNumber);
         }else{
             attackHuman();
         }
