@@ -35,10 +35,10 @@ public class Run {
         boolean found = false;
 
         int shipType = sc.nextInt();
+        int index = 0;
 
         if (containNumber.contains(shipType)) {
-            int index = containNumber.indexOf(shipType);
-            containNumber.set(index, 0);
+            index = containNumber.indexOf(shipType);
             found = true;
         }
         if(!checkZero(containNumber)){
@@ -62,6 +62,10 @@ public class Run {
                 System.out.println("Pls write different number");
                 selectShip();
             }
+            containNumber.set(index, 0);
+            System.out.println(containNumber);
+        }else{
+            attackHuman();
         }
 
     }
@@ -108,7 +112,6 @@ public class Run {
                     if (matrix[x][y + i] == 0) {
                         if (y + 2 <= 5 && y >= 0) {
                             matrix[x][y + i] = 1;
-
 
                         } else {
                             System.out.println("You are off the map. Pls try again!");
@@ -326,7 +329,7 @@ public class Run {
 
     }
     public void computerPutShips(String shipType) {
-        Random rnd = new Random(4);
+        Random rnd = new Random();
 
         int x = 0;
         int y = 0;
@@ -345,11 +348,12 @@ public class Run {
             chosen = axis.x;
         } else {
             chosen = axis.y;
+        }
 
             if (shipType.equals("smallShip")) {
                 if (chosen.equals(axis.x)) {
-                    x = rnd.nextInt();
-                    y = rnd.nextInt();
+                    x = rnd.nextInt(5);
+                    y = rnd.nextInt(5);
                     for (int i = 0; i < smallShip; i++) {
                         if (computerMatrix[x][y + i] == 0) {
                             if (y + 2 <= 5 && y >= 0) {
@@ -363,8 +367,8 @@ public class Run {
                     }
                     selectShip();
                 } else if (chosen.equals(axis.y)) {
-                    y = rnd.nextInt();
-                    x = rnd.nextInt();
+                    y = rnd.nextInt(5);
+                    x = rnd.nextInt(5);
 
                     for (int i = 0; i < smallShip; i++) {
                         if (computerMatrix[x + i][y] == 0) {
@@ -384,8 +388,8 @@ public class Run {
                 }
             } else if (shipType.equals("middleShip")) {
                 if (chosen.equals(axis.x)) {
-                    x = rnd.nextInt();
-                    y = rnd.nextInt();
+                    x = rnd.nextInt(5);
+                    y = rnd.nextInt(5);
 
                     for (int i = 0; i < middleShip; i++) {
                         if (computerMatrix[x][y + i] == 0) {
@@ -404,8 +408,8 @@ public class Run {
                     computerSelectShip();
 
                 } else if (chosen.equals(axis.y)) {
-                    y = rnd.nextInt();
-                    x = rnd.nextInt();
+                    y = rnd.nextInt(5);
+                    x = rnd.nextInt(5);
 
                     for (int i = 0; i < middleShip; i++) {
                         if (computerMatrix[x + i][y] == 0) {
@@ -422,8 +426,8 @@ public class Run {
                 }
             } else if (shipType.equals("largeShip")) {
                 if (chosen.equals(axis.x)) {
-                    x = rnd.nextInt();
-                    y = rnd.nextInt();
+                    x = rnd.nextInt(5);
+                    y = rnd.nextInt(5);
 
                     for (int i = 0; i < largeShip; i++) {
                         if (computerMatrix[x][y + i] == 0) {
@@ -438,8 +442,8 @@ public class Run {
                     }
                     computerSelectShip();
                 } else if (chosen.equals(axis.y)) {
-                    y = rnd.nextInt();
-                    x = rnd.nextInt();
+                    y = rnd.nextInt(5);
+                    x = rnd.nextInt(5);
 
                     for (int i = 0; i < largeShip; i++) {
                         if (computerMatrix[x + i][y] == 0) {
@@ -454,10 +458,7 @@ public class Run {
                     }
                     computerSelectShip();
                 }
-
             }
-
-        }
 
     }
     public static boolean checkMatrix(int[][] matrix) {
